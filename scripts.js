@@ -74,14 +74,7 @@ map.on("load", async () => {
   map.off('render', frame);
   mapboxgl.restoreNow();
 
-  if (prod) {
-    // download the encoded video file
-    const mp4 = encoder.end();
-    const anchor = document.createElement("a");
-    anchor.href = URL.createObjectURL(new Blob([mp4], { type: "video/mp4" }));
-    anchor.download = `stage_${stage}_${gender}${square ? '_square' : ''}`;
-    anchor.click();
-  }
+
 
 });
 
@@ -129,25 +122,23 @@ const playAnimations = async (trackGeojson) => {
     const { bearing, altitude } = await flyInAndRotate({
       map,
       targetLngLat,
-      duration: prod ? 7000 : 5000,
+      duration: 5000,
       startAltitude: 3000000,
       endAltitude: 12000,
       startBearing: 0,
       endBearing: -20,
       startPitch: 40,
       endPitch: 50,
-      prod
     });
 
     // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
     await animatePath({
       map,
-      duration: prod ? 60000 : 20000,
+      duration: 10000,
       path: trackGeojson,
       startBearing: bearing,
       startAltitude: altitude,
       pitch: 50,
-      prod
     });
 
     // get the bounds of the linestring, use fitBounds() to animate to a final view
