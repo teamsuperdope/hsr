@@ -171,7 +171,7 @@ map.addLayer({
     source: "line",
     paint: {
       "line-color": "rgba(0,0,0,0)",
-      "line-width": 9,
+      "line-width": 6,
       "line-opacity": 0.8,
     },
     layout: {
