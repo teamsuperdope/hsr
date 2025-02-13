@@ -170,7 +170,13 @@ const addPathSourceAndLayer = (trackGeojson) => {
     type: "line",
     source: "line",
     paint: {
-      "line-color": "rgba(0,0,0,0)",
+      "line-gradient": [
+        "interpolate",
+        ["linear"],
+        ["line-progress"], // Animates the gradient along the route
+        0, "blue",        // 🌊 Blue at the start
+        1, "green"        // 🌿 Green at the end
+      ],
       "line-width": 9,
       "line-opacity": 0.8,
     },
