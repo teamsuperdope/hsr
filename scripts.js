@@ -65,7 +65,7 @@ map.on("load", async () => {
 
 
   // fetch the geojson for the linestring to be animated
-  const trackGeojson = await fetch(`./data/${gender}-stage-${stage}.geojson`).then((d) =>
+  const trackGeojson = await fetch("./male-stage-1.geojson").then((d) =>
     d.json()
   );
   // kick off the animations
