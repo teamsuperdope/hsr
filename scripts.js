@@ -24,7 +24,7 @@ mapboxgl.accessToken =
 const map = new mapboxgl.Map({
   container: "map",
   projection: "globe",
-  style: "mapbox://styles/chriswhongmapbox/cl5wwjkj4001214lfkquw73l3",
+  style: "mapbox://styles/mapbox/streets-v11",
   zoom: 1.9466794621990684,
   center: { lng: 12.563530000000014, lat: 58.27372323078674 },
   pitch: 70,
