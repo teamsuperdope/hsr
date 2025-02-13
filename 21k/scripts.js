@@ -165,12 +165,12 @@ const addPathSourceAndLayer = (trackGeojson) => {
     lineMetrics: true,
     data: trackGeojson,
   });
-  map.addLayer({
+map.addLayer({
     id: "line-layer",
     type: "line",
     source: "line",
-paint: {
-      "line-color": "rgba(0,0,0,0)",  
+    paint: {
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 9,
       "line-opacity": 0.8,
     },
