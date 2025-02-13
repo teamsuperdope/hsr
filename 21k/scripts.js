@@ -135,7 +135,7 @@ const playAnimations = async (trackGeojson) => {
     // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
     await animatePath({
       map,
-      duration: 10000,
+      duration: 40000,
       path: trackGeojson,
       startBearing: bearing,
       startAltitude: altitude,
