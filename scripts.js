@@ -127,8 +127,8 @@ const playAnimations = async (trackGeojson) => {
       endAltitude: 300,
       startBearing: 0,
       endBearing: 90,
-      startPitch: 70,
-      endPitch: 70,
+      startPitch: 40,
+      endPitch: 50,
     });
 
     // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
@@ -138,13 +138,13 @@ const playAnimations = async (trackGeojson) => {
       path: trackGeojson,
       startBearing: bearing,
       startAltitude: altitude,
-      pitch: 70,
+      pitch: 50,
     });
 
     // get the bounds of the linestring, use fitBounds() to animate to a final view
     const bounds = turf.bbox(trackGeojson);
     map.fitBounds(bounds, {
-      duration: 2000,
+      duration: 3000,
       pitch: 30,
       bearing: 0,
       padding: 120,
