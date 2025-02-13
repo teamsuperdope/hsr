@@ -125,7 +125,7 @@ const playAnimations = async (trackGeojson) => {
       targetLngLat,
       duration: 5000,
       startAltitude: 2000000,
-      endAltitude: 3000,
+      endAltitude: 10000,
       startBearing: 0,
       endBearing: 90,
       startPitch: 40,
