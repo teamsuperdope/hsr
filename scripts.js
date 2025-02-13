@@ -18,18 +18,7 @@ if (square) {
   document.getElementById("map").style.width = '1080px';
 }
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiZXJpbm1hcnRpbiIsImEiOiJjazA4ZWUybWgwYjJ2M2hsbXA3cGRreDlsIn0.PwVPthATVTg4W-Cj4lkf1Q";
 
-const map = new mapboxgl.Map({
-  container: "map",
-  projection: "globe",
-  style: "mapbox://styles/mapbox/streets-v11",
-  zoom: 1.9466794621990684,
-  center: { lng: 12.563530000000014, lat: 58.27372323078674 },
-  pitch: 70,
-  bearing: 0,
-});
 
 window.map = map
 
