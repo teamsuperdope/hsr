@@ -19,7 +19,7 @@ if (square) {
 }
 
 mapboxgl.accessToken =
-  "pk.eyJ1IjoiY2hyaXN3aG9uZ21hcGJveCIsImEiOiJjbDR5OTNyY2cxZGg1M2luejcxZmJpaG1yIn0.mUZ2xk8CLeBFotkPvPJHGg";
+  "pk.eyJ1IjoiZXJpbm1hcnRpbiIsImEiOiJjazA4ZWUybWgwYjJ2M2hsbXA3cGRreDlsIn0.PwVPthATVTg4W-Cj4lkf1Q";
 
 const map = new mapboxgl.Map({
   container: "map",
