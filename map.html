@@ -3,44 +3,124 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>Mapbox Debug</title>
+    <title>Mapbox Animated Route</title>
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
     <style>
         body { margin: 0; padding: 0; }
-        #map { width: 100vw; height: 100vh; background-color: lightgray; }
+        #map { width: 100vw; height: 100vh; }
     </style>
 </head>
 <body>
-    <h1 style="position:absolute;top:10px;left:10px;z-index:9999;color:red;">Mapbox Debug Mode</h1>
     <div id="map"></div>
 
     <script>
         console.log("Initializing Mapbox...");
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja2w5b2J6a3AwNGF5MnFsbjE3bThub3JlIn0.lT4eO9W9H3D6o8DlX6A4zg';  // Replace with actual token
+        // ✅ Using the demo token - replace with your own when ready
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja2w5b2J6a3AwNGF5MnFsbjE3bThub3JlIn0.lT4eO9W9H3D6o8DlX6A4zg';
 
-        try {
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [-74.5, 40], 
-                zoom: 9
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-122.486052, 37.830348], 
+            zoom: 14,
+            pitch: 45,
+            bearing: 0
+        });
+
+        console.log("Mapbox initialized successfully!");
+
+        map.on('load', () => {
+            console.log("Mapbox map loaded.");
+
+            // Route coordinates (San Francisco example)
+            const routeCoordinates = [
+                [-122.486052, 37.830348], 
+                [-122.483482, 37.829792], 
+                [-122.482572, 37.828866], 
+                [-122.481777, 37.829618], 
+                [-122.480944, 37.829406]
+            ];
+
+            // Create the route GeoJSON
+            const routeGeoJSON = {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'LineString',
+                    coordinates: routeCoordinates
+                }
+            };
+
+            // Add route line to map
+            map.addSource('route', { type: 'geojson', data: routeGeoJSON });
+
+            map.addLayer({
+                id: 'route',
+                type: 'line',
+                source: 'route',
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: { 'line-color': '#FF5733', 'line-width': 5 }
             });
 
-            console.log("Mapbox initialized successfully!");
-
-            map.on('load', () => {
-                console.log("Mapbox map loaded.");
+            // Add moving marker
+            map.addSource('point', {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'Point',
+                        coordinates: routeCoordinates[0]
+                    }
+                }
             });
 
-            map.on('error', (e) => {
-                console.error("Mapbox error:", e);
+            map.addLayer({
+                id: 'point',
+                type: 'circle',
+                source: 'point',
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#FF0000'
+                }
             });
 
-        } catch (error) {
-            console.error("Mapbox failed to initialize:", error);
-        }
+            let counter = 0;
+            function animateMarker() {
+                if (counter < routeCoordinates.length) {
+                    const newPoint = {
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'Point',
+                            coordinates: routeCoordinates[counter]
+                        }
+                    };
+
+                    map.getSource('point').setData(newPoint);
+                    map.easeTo({
+                        center: routeCoordinates[counter],
+                        bearing: counter * 10,
+                        pitch: 50,
+                        zoom: 15,
+                        duration: 500
+                    });
+
+                    counter++;
+                    requestAnimationFrame(animateMarker);
+                }
+            }
+
+            console.log("Starting route animation...");
+            animateMarker();
+        });
+
+        map.on('error', (e) => {
+            console.error("Mapbox error:", e);
+        });
     </script>
 </body>
 </html>
