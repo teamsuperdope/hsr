@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>Mapbox Animated Route</title>
+    <title>Animated Route</title>
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet" />
     <style>
         body { margin: 0; padding: 0; }
         #map { width: 100vw; height: 100vh; }
@@ -14,12 +14,9 @@
 </head>
 <body>
     <div id="map"></div>
-
+    
     <script>
-        console.log("Initializing Mapbox...");
-
-        // ✅ Using the demo token - replace with your own when ready
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpbm1hcnRpbiIsImEiOiJjazA4ZWUybWgwYjJ2M2hsbXA3cGRreDlsIn0.PwVPthATVTg4W-Cj4lkf1Q';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja2w5b2J6a3AwNGF5MnFsbjE3bThub3JlIn0.lT4eO9W9H3D6o8DlX6A4zg';
 
         const map = new mapboxgl.Map({
             container: 'map',
@@ -30,32 +27,28 @@
             bearing: 0
         });
 
-        console.log("Mapbox initialized successfully!");
+        const routeCoordinates = [
+            [-122.486052, 37.830348], 
+            [-122.483482, 37.829792], 
+            [-122.482572, 37.828866], 
+            [-122.481777, 37.829618], 
+            [-122.480944, 37.829406]
+        ];
+
+        const routeGeoJSON = {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+                type: 'LineString',
+                coordinates: routeCoordinates
+            }
+        };
 
         map.on('load', () => {
-            console.log("Mapbox map loaded.");
-
-            // Route coordinates (San Francisco example)
-            const routeCoordinates = [
-                [-122.486052, 37.830348], 
-                [-122.483482, 37.829792], 
-                [-122.482572, 37.828866], 
-                [-122.481777, 37.829618], 
-                [-122.480944, 37.829406]
-            ];
-
-            // Create the route GeoJSON
-            const routeGeoJSON = {
-                type: 'Feature',
-                properties: {},
-                geometry: {
-                    type: 'LineString',
-                    coordinates: routeCoordinates
-                }
-            };
-
-            // Add route line to map
-            map.addSource('route', { type: 'geojson', data: routeGeoJSON });
+            map.addSource('route', {
+                type: 'geojson',
+                data: routeGeoJSON
+            });
 
             map.addLayer({
                 id: 'route',
@@ -65,7 +58,6 @@
                 paint: { 'line-color': '#FF5733', 'line-width': 5 }
             });
 
-            // Add moving marker
             map.addSource('point', {
                 type: 'geojson',
                 data: {
@@ -114,12 +106,7 @@
                 }
             }
 
-            console.log("Starting route animation...");
             animateMarker();
-        });
-
-        map.on('error', (e) => {
-            console.error("Mapbox error:", e);
         });
     </script>
 </body>
