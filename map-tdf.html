@@ -22,6 +22,18 @@
     <div class="viewport-full relative scroll-hidden">
       <div id="map"></div>
     </div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpbm1hcnRpbiIsImEiOiJjazA4ZWUybWgwYjJ2M2hsbXA3cGRreDlsIn0.PwVPthATVTg4W-Cj4lkf1Q';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-122.486052, 37.830348], 
+            zoom: 14,
+            pitch: 45,
+            bearing: 0
+        });
+    </script>
   </body>
   <script src="d3-ease.min.js" type="module"></script>
   <script src="scripts.js" type="module"></script>
