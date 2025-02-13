@@ -1,22 +1,9 @@
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "_gpxType": "trk",
-        "name": "RHSR 21.1k 2025",
-        "type": "running",
-        "links": [
-          {
-            "href": "https://www.strava.com/routes/3299598186045595912"
-          }
-        ],
-        "coordinateProperties": {}
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
+  "type": "Feature",
+  "properties": {},
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
           [
             -81.37357,
             44.496460000000006,
