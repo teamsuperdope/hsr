@@ -24,35 +24,6 @@ if (square) {
 window.map = map
 
 map.on("load", async () => {
-
-  // add checkered flag
-map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkered_flag.svg/120px-Checkered_flag.svg.png', (error, image) => {
-    if (error) throw error;
-    map.addImage('checkered-flag', image);
-
-    // Add flag marker at the finish line
-    map.addLayer({
-        id: "checkered-flag-marker",
-        type: "symbol",
-        source: {
-            type: "geojson",
-            data: {
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    type: "Point",
-                    coordinates: trackGeojson.geometry.coordinates.slice(-1)[0] // Last point of the route
-                }
-            }
-        },
-        layout: {
-            "icon-image": "checkered-flag", // Use loaded flag
-            "icon-size": 0.2, // Adjust size
-            "icon-anchor": "bottom" // Place correctly
-        }
-    });
-});
-
   
   // add 3d, sky and fog
   add3D();
@@ -269,6 +240,34 @@ map.addLayer({
       'fill-extrusion-height': 1200
     }
   });
+
+    // add checkered flag
+map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkered_flag.svg/120px-Checkered_flag.svg.png', (error, image) => {
+    if (error) throw error;
+    map.addImage('checkered-flag', image);
+
+    // Add flag marker at the finish line
+    map.addLayer({
+        id: "checkered-flag-marker",
+        type: "symbol",
+        source: {
+            type: "geojson",
+            data: {
+                type: "Feature",
+                properties: {},
+                geometry: {
+                    type: "Point",
+                    coordinates: trackGeojson.geometry.coordinates.slice(-1)[0] // Last point of the route
+                }
+            }
+        },
+        layout: {
+            "icon-image": "checkered-flag", // Use loaded flag
+            "icon-size": 0.2, // Adjust size
+            "icon-anchor": "bottom" // Place correctly
+        }
+    });
+});
 
 
 };
