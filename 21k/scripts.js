@@ -181,65 +181,7 @@ map.addLayer({
     },
   });
 
-  map.addSource("start-pin-base", {
-    type: "geojson",
-    data: createGeoJSONCircle(trackGeojson.geometry.coordinates[0], 0.04)
-  });
-
-  map.addSource("start-pin-top", {
-    type: "geojson",
-    data: createGeoJSONCircle(trackGeojson.geometry.coordinates[0], 0.25)
-  });
-
-  map.addSource("end-pin-base", {
-    type: "geojson",
-    data: createGeoJSONCircle(trackGeojson.geometry.coordinates.slice(-1)[0], 0.04)
-  });
-
-  map.addSource("end-pin-top", {
-    type: "geojson",
-    data: createGeoJSONCircle(trackGeojson.geometry.coordinates.slice(-1)[0], 0.25)
-  });
-
-  map.addLayer({
-    id: "start-fill-pin-base",
-    type: "fill-extrusion",
-    source: "start-pin-base",
-    paint: {
-      'fill-extrusion-color': '#0bfc03',
-      'fill-extrusion-height': 1000
-    }
-  });
-  map.addLayer({
-    id: "start-fill-pin-top",
-    type: "fill-extrusion",
-    source: "start-pin-top",
-    paint: {
-      'fill-extrusion-color': '#0bfc03',
-      'fill-extrusion-base': 1000,
-      'fill-extrusion-height': 1200
-    }
-  });
-
-  map.addLayer({
-    id: "end-fill-pin-base",
-    type: "fill-extrusion",
-    source: "end-pin-base",
-    paint: {
-      'fill-extrusion-color': '#eb1c1c',
-      'fill-extrusion-height': 1000
-    }
-  });
-  map.addLayer({
-    id: "end-fill-pin-top",
-    type: "fill-extrusion",
-    source: "end-pin-top",
-    paint: {
-      'fill-extrusion-color': '#eb1c1c',
-      'fill-extrusion-base': 1000,
-      'fill-extrusion-height': 1200
-    }
-  });
+  
 
     // add checkered flag
 map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkered_flag.svg/120px-Checkered_flag.svg.png', (error, image) => {
